@@ -353,6 +353,11 @@ Your forever-loving husband 💑👫💍💖✨❤️🌹🌙🕊️💌`;
       letter.scrollIntoView({ behavior: "smooth" });
     }
 
+      // 🔊 Start YouTube audio (only after click)
+  {const yt = document.getElementById("ytAudio");
+  yt.src = "https://www.youtube.com/embed/8GkPMG8IwBQ?autoplay=1&loop=1&playlist=8GkPMG8IwBQ&controls=0&modestbranding=1";
+}
+
     const music = document.getElementById("bgMusic");
     const toggleBtn = document.getElementById("musicToggle");
     const volumeSlider = document.getElementById("volumeControl");
@@ -406,7 +411,7 @@ Your forever-loving husband 💑👫💍💖✨❤️🌹🌙🕊️💌`;
     id="ytPlayer"
     width="1"
     height="1"
-    src="https://www.youtube.com/embed/8GkPMG8IwBQ?autoplay=1&loop=1&playlist=8GkPMG8IwBQ&controls=0&showinfo=0&mute=0"
+    src="https://www.youtube.com/embed/8GkPMG8IwBQ?autoplay=1&loop=1&playlist=8GkPMG8IwBQ&controls=0&info=0&mute=0"
     frameborder="0"
     allow="autoplay"
     allowfullscreen
@@ -425,16 +430,16 @@ Your forever-loving husband 💑👫💍💖✨❤️🌹🌙🕊️💌`;
 </script>
 <!-- Hidden YouTube Audio -->
 <div id="ytPlayerContainer" style="display: none;">
-  <iframe
-    id="ytPlayer"
-    width="1"
-    height="1"
-    src=""
-    frameborder="0"
-    allow="autoplay"
-    allowfullscreen
-  ></iframe>
-</div>
-
+    <iframe
+      id="ytPlayer"
+      width="1"
+      height="1"
+      src=""
+      frameborder="0"
+      allow="autoplay"
+      allowfullscreen
+    ></iframe>
+  </div>
+  
 </body>
 </html>
