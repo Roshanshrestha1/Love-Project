@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💖 Still Loving You 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Roboto&family=Tangerine&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #1e1e2f, #3a3a5f);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    #musicToggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #ffb6b6;
+      color: #fff;
+      font-size: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
+      z-index: 1000;
+      animation: pulse 2s infinite;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #musicToggle:hover {
+      background-color: #ff8fa3;
+      transform: scale(1.1);
+    }
+
+    header {
+      padding: 60px 20px 30px;
+    }
+
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      margin-bottom: 10px;
+      animation: fadeInDown 2s ease-out;
+    }
+
+    .timer {
+      font-family: 'Tangerine', cursive;
+      font-size: 40px;
+      font-weight: bold;
+      color: #ffe6e6;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 15px;
+      display: inline-block;
+      margin-top: 10px;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 10px rgba(255, 192, 203, 0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    .section {
+      padding: 60px 20px;
+    }
+
+    .section h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #ffb6b6;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .envelope {
+      width: 120px;
+      height: 80px;
+      background: #ffb6b6;
+      margin: 40px auto;
+      border-radius: 5px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation: pulse 2s infinite;
+    }
+
+    .envelope::before, .envelope::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+
+    .envelope::before {
+      top: 0;
+      left: 0;
+      border-width: 0 60px 40px 60px;
+      border-color: transparent transparent #ffcccc transparent;
+    }
+
+    .envelope::after {
+      bottom: 0;
+      left: 0;
+      border-width: 40px 60px 0 60px;
+      border-color: #ff9999 transparent transparent transparent;
+    }
+
+    .popup-letter {
+      display: none;
+      margin: 40px auto;
+      background-color: #fff0f5;
+      color: #222;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 90%;
+      max-height: 80%;
+      overflow-y: auto;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.5);
+      animation: fadeIn 1s ease, floatIn 5s infinite alternate;
+    }
+
+    .popup-letter h2 {
+      font-family: 'Dancing Script', cursive;
+      color: #e91e63;
+      font-size: 32px;
+    }
+
+    .popup-letter p {
+      font-size: 18px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .memories {
+      margin-top: 60px;
+      padding: 40px 20px;
+    }
+
+    .memories h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      color: #ffd1dc;
+      margin-bottom: 20px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .photo-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    #photoUpload {
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    #photoUpload input {
+      padding: 10px;
+      border-radius: 8px;
+      background: #ffd1dc;
+      border: none;
+      cursor: pointer;
+      color: #333;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 14px;
+      color: #aaa;
+      animation: fadeInUp 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes floatIn {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-10px); }
+    }
+
+    #volumeControl {
+      position: fixed;
+      top: 85px;
+      left: 20px;
+      width: 120px;
+      height: 5px;
+      appearance: none;
+      background: #ffd1dc;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 0 6px rgba(255, 182, 193, 0.7);
+      transition: opacity 0.3s ease;
+    }
+
+    #volumeControl::-webkit-slider-thumb,
+    #volumeControl::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background: #ff8fa3;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="musicToggle" onclick="toggleMusic()">🎵</div>
+  <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1">
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="/music/lov.mp3" type="audio/mpeg" />
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <header>
+    <h1>💞 I'm Still Loving You 💞</h1>
+    <div class="timer" id="timer">⏳ Loading...</div>
+    <p style="margin-top: 10px; font-style: italic;">🕰️ Time since my heart started waiting for you</p>
+  </header>
+
+  <div class="section">
+    <h2>💌 Click the Letter 💌</h2>
+    <div class="envelope" onclick="showLetter()"></div>
+  </div>
+
+  <div class="popup-letter" id="letter">
+    <h2>💖 Letter From My Heart 💖</h2>
+    <p id="typedText"></p>
+  </div>
+
+  <div class="memories">
+    <h2>📸 Our Memories</h2>
+    <div class="photo-grid" id="photoGrid">
+      <img src="/images/000.jpg" alt="Memory 1">
+      <img src="/images/00001.jpg" alt="Memory 2">
+      <img src="/images/00002.jpg" alt="Memory 3">
+      <img src="/images/00098.jpg" alt="Memory 4">
+      <img src="/images/003.jpg" alt="Memory 5">
+    </div>
+  </div>
+
+  <footer>
+    ✨ Made with ❤️ — I'll wait one day longer than forever. ✨
+  </footer>
+
+  <script>
+    function getNepalTime() {
+      const local = new Date();
+      const utc = local.getTime() + (local.getTimezoneOffset() * 60000);
+      return new Date(utc + (5 * 60 + 45) * 60000);
+    }
+
+    function getStartTime() {
+      const now = getNepalTime();
+      const start = new Date(now);
+      start.setMonth(start.getMonth() - 5);
+      start.setDate(start.getDate() - 8);
+      start.setHours(start.getHours() - 1);
+      start.setMinutes(start.getMinutes() - 32);
+      return start;
+    }
+
+    const startNepalTime = getStartTime();
+
+    function updateTimer() {
+      const now = getNepalTime();
+      const diff = now - startNepalTime;
+
+      const seconds = Math.floor((diff / 1000) % 60);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const hours = Math.floor((diff / 3600000) % 24);
+      const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30);
+      const months = Math.floor((diff / (1000 * 60 * 60 * 24 * 30)) % 12);
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+
+      document.getElementById("timer").innerText =
+        `⏳ ${years} Year 🌟 ${months} Month 📅 ${days} Day ⏰ ${hours} Hour 🕐 ${minutes} Minute ⏱ ${seconds} Second and counting...`;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    function showLetter() {
+      const text = `🫀 Ma timilai ajhai pani mutu bhari maya garchu.
+Timi mero sansar hau...
+🙏 Maile gareka sabai galti ko lagi ma hridaya dekhi maf maagchhu.
+Ma timro khushi ma khushi manauchhu...
+🕯️ Ma timilai jasto maya garnu sakchhu...
+💖 Ma chahanchu ek din timi farkinechau...
+With all my heart,
+Your forever-loving husband 💑👫💍💖✨❤️🌹🌙🕊️💌`;
+
+      const letter = document.getElementById("letter");
+      const typedText = document.getElementById("typedText");
+      letter.style.display = "block";
+      typedText.innerHTML = "";
+      let i = 0;
+      const typing = setInterval(() => {
+        if (i < text.length) {
+          typedText.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+          i++;
+        } else {
+          clearInterval(typing);
+        }
+      }, 40);
+
+      letter.scrollIntoView({ behavior: "smooth" });
+    }
+
+    const music = document.getElementById("bgMusic");
+    const toggleBtn = document.getElementById("musicToggle");
+    const volumeSlider = document.getElementById("volumeControl");
+
+    volumeSlider.addEventListener("input", function () {
+      music.volume = this.value;
+    });
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        toggleBtn.innerHTML = "🎵";
+      } else {
+        music.pause();
+        toggleBtn.innerHTML = "🔇";
+      }
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        music.muted = false;
+        music.play().catch(() => {
+          toggleBtn.innerHTML = "🔇";
+        });
+      }, 500);
+
+      document.body.addEventListener('click', () => {
+        music.muted = false;
+        music.play();
+        toggleBtn.innerHTML = "🎵";
+      }, { once: true });
+    });
+
+    // Dynamic photo uploader
+    document.getElementById("photoInput").addEventListener("change", function (e) {
+      const grid = document.getElementById("photoGrid");
+      [...e.target.files].forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = document.createElement("img");
+          img.src = event.target.result;
+          img.alt = "Uploaded Memory";
+          grid.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
+</body>
+</html>
