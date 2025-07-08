@@ -253,10 +253,10 @@
   <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1">
 
   <audio id="bgMusic" autoplay loop>
-    <source src="/music/lov.mp3" type="audio/mpeg" />
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+    <source src="https://docs.google.com/uc?export=download&id=12cSR0w1mjUEaS9WAnrKelvkpqwD21GK8" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+  
 
   <header>
     <h1>💞 I'm Still Loving You 💞</h1>
@@ -400,6 +400,29 @@ Your forever-loving husband 💑👫💍💖✨❤️🌹🌙🕊️💌`;
         reader.readAsDataURL(file);
       });
     });
-  </script>
+  </script><!-- Hidden YouTube Audio Player -->
+<div style="position: absolute; width: 1px; height: 1px; overflow: hidden;">
+  <iframe
+    id="ytPlayer"
+    width="1"
+    height="1"
+    src="https://www.youtube.com/embed/8GkPMG8IwBQ?autoplay=1&loop=1&playlist=8GkPMG8IwBQ&controls=0&showinfo=0&mute=0"
+    frameborder="0"
+    allow="autoplay"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<script>
+  // Enable autoplay after user interaction (browser restriction workaround)
+  document.body.addEventListener('click', () => {
+    const iframe = document.getElementById("ytPlayer");
+    iframe.contentWindow.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      '*'
+    );
+  }, { once: true });
+</script>
+
 </body>
 </html>
